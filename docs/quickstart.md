@@ -33,15 +33,15 @@ Die Setup-PR enthaelt normalerweise:
 
 Voraussetzung: `/init` in einem noch unkonfigurierten Repository funktioniert nur, wenn die GitHub App installiert ist und die Repository-Organisation fuer Projekt-Bootstrap freigegeben ist. Wenn `/init` nicht reagiert, fragt Tutor/Admin oder legt `.github/classroom-agent.json` manuell an.
 
-## 3. Optional: CI anlegen lassen
+## 3. CI-Workflow mit anlegen lassen
 
-Standardmaessig legt `/init` keine GitHub-Actions-Datei an. Wenn ihr den vorgeschlagenen Dotnet-Build-Workflow wollt:
+`/init` erstellt bewusst nur das Basis-Setup. Wenn ihr direkt auch den vorgeschlagenen Dotnet-Build-Workflow anlegen lassen wollt, nutzt in der Projekte-Organisation:
 
 ```text
 /init --with-dotnet-build
 ```
 
-Der Workflow heisst `dotnet-build` und laeuft bei Pull Requests nach `main`. Falls GitHub der App das Schreiben von Workflow-Dateien nicht erlaubt, kommentiert Kevin das und ihr koennt die Vorlage manuell kopieren: [`../vorlagen/dotnet-build.yml`](../vorlagen/dotnet-build.yml).
+Der Workflow heisst `dotnet-build` und laeuft bei Pull Requests nach `main`. Die GitHub App darf in der Projekte-Organisation Workflow-Dateien anlegen. Falls ihr den Workflow spaeter manuell ergaenzen wollt, nutzt die Vorlage [`../vorlagen/dotnet-build.yml`](../vorlagen/dotnet-build.yml).
 
 ## 4. Normaler Arbeitsablauf
 
@@ -150,5 +150,5 @@ Schaut zuerst in die [FAQ](faq.md). Die haeufigsten Ursachen sind:
 - Setup-PR wurde noch nicht gemerged.
 - `.github/classroom-agent.json` fehlt.
 - `agent-config.json` hat ungueltiges JSON.
-- GitHub App hat keine Workflow-Write-Permission.
+- `/init` wurde ohne `--with-dotnet-build` ausgefuehrt, obwohl ihr den CI-Workflow direkt mit anlegen wolltet.
 - Kevin-Opt-in fehlt.

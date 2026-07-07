@@ -109,9 +109,9 @@ Die Datei sagt dem Server: Dieses Repository ist ein Projekt-Repository.
 
 ## 5. Optional: CI direkt mit anlegen
 
-Standardmaessig legt `/init` keine GitHub-Actions-Datei an.
+Plain `/init` legt bewusst nur das Basis-Setup an.
 
-Wenn ihr den vorgeschlagenen Dotnet-Build-Workflow wollt:
+Wenn ihr den vorgeschlagenen Dotnet-Build-Workflow direkt mit anlegen wollt:
 
 ```text
 /init --with-dotnet-build
@@ -129,7 +129,7 @@ Warum ist das wichtig?
 - Rote Builds werden im Review sichtbar.
 - Ihr habt direkt Feedback, ob euer PR baut.
 
-Wenn die App keine Workflow-Dateien schreiben darf, koennt ihr die Vorlage aus `vorlagen/dotnet-build.yml` manuell kopieren.
+In der Projekte-Organisation hat die GitHub App die noetigen Rechte dafuer. Wenn ihr CI spaeter nachruesten wollt, koennt ihr die Vorlage aus `vorlagen/dotnet-build.yml` manuell kopieren.
 
 ---------------------------------------------------------------------
 

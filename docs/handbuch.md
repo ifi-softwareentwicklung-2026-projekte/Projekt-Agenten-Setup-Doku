@@ -102,6 +102,8 @@ agent:review
 
 Empfohlen ist ein PR-only Workflow mit dem Check-Namen `dotnet-build`. Der Server ist darauf ausgelegt, automatische Reviews nach Abschluss dieses Checks zu starten.
 
+Wenn ihr den Workflow direkt bei der Aktivierung anlegen lassen wollt, nutzt `/init --with-dotnet-build`. Die GitHub App hat in der Projekte-Organisation die dafuer noetigen Rechte. Plain `/init` bleibt das bewusst schlanke Basis-Setup ohne CI-Datei.
+
 Ihr koennt eine andere CI verwenden. Dann ist sie fuer Menschen weiter nuetzlich, aber Agent-Gating passt nur, wenn der Server entsprechend konfiguriert ist.
 
 Vorlage: [`../vorlagen/dotnet-build.yml`](../vorlagen/dotnet-build.yml)

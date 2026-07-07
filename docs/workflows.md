@@ -14,7 +14,7 @@ Dieses Cookbook beschreibt konkrete Situationen und die passenden Schritte.
 3. Setup-PR pruefen.
 4. Setup-PR mergen.
 
-Optional mit CI:
+Mit CI-Workflow in derselben Setup-PR:
 
 ```text
 /init --with-dotnet-build
@@ -24,6 +24,7 @@ Ergebnis:
 
 - `.github/classroom-agent.json` aktiviert den Projektworkflow.
 - `agent-config.json` enthaelt sichere Defaults.
+- Bei `/init --with-dotnet-build` wird zusaetzlich `.github/workflows/dotnet-build.yml` vorgeschlagen.
 - Agent-Labels sind angelegt.
 
 ## 2. Feature sauber umsetzen

@@ -19,7 +19,7 @@ Empfohlene Vorlage: [`../vorlagen/classroom-agent.project.json`](../vorlagen/cla
 
 ## 2. `/init` und CI-Opt-in
 
-`/init` legt standardmaessig keine Workflow-Datei an. Wenn der Agent den Dotnet-Build-Workflow in die Setup-PR aufnehmen soll:
+`/init` legt bewusst nur das Basis-Setup an. Wenn der Agent den Dotnet-Build-Workflow in die Setup-PR aufnehmen soll, nutzt in der Projekte-Organisation:
 
 ```text
 /init --with-dotnet-build
@@ -38,6 +38,8 @@ Alternativ dauerhaft in `.github/classroom-agent.json`:
   }
 }
 ```
+
+Die GitHub App hat in der Projekte-Organisation die noetigen Rechte, um Workflow-Dateien anzulegen. Ohne `--with-dotnet-build` oder JSON-Opt-in bleibt CI trotzdem freiwillig, weil manche Teams eigene Workflows nutzen.
 
 ## 3. `agent-config.json`
 

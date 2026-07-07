@@ -26,22 +26,23 @@ Moegliche Ursachen:
 
 - Repository ist bereits vorbereitet.
 - Es gibt keine Aenderung mehr fuer Kevin.
-- Nur die Workflow-Datei wurde angefragt, aber GitHub erlaubt der App kein Schreiben von Workflow-Dateien.
+- Ihr habt `/init` ohne `--with-dotnet-build` genutzt und erwartet trotzdem eine CI-Workflow-Datei.
 
-Wenn keine Workflow-Datei geschrieben werden darf, funktioniert der Projekt-Agent trotzdem. Legt CI bei Bedarf manuell an.
+Plain `/init` erstellt nur das Basis-Setup. Wenn ihr den CI-Workflow direkt in der Setup-PR wollt, nutzt `/init --with-dotnet-build`.
 
 ## `/init --with-dotnet-build` fuegt keine Workflow-Datei hinzu
 
 Moegliche Ursachen:
 
 - Workflow existiert bereits.
-- GitHub App hat keine `Workflows: Read and write` Permission.
-- Die geaenderte App-Permission wurde in der Organisation noch nicht akzeptiert.
+- Es wurde plain `/init` statt `/init --with-dotnet-build` genutzt.
+- Die Datei wurde spaeter manuell entfernt oder umbenannt.
 
 Loesung fuer Studierende:
 
-- Vorlage [`../vorlagen/dotnet-build.yml`](../vorlagen/dotnet-build.yml) manuell nach `.github/workflows/dotnet-build.yml` kopieren.
-- Tutor/Admin informieren.
+- `/init --with-dotnet-build` nutzen, wenn das Repository noch nicht fertig eingerichtet ist.
+- Vorlage [`../vorlagen/dotnet-build.yml`](../vorlagen/dotnet-build.yml) manuell nach `.github/workflows/dotnet-build.yml` kopieren, wenn ihr CI spaeter nachruesten wollt.
+- Tutor/Admin informieren, falls trotz Projekte-Org-Rechten weiterhin ein Permission-Fehler kommentiert wird.
 
 ## Lisa reviewed nicht automatisch
 
