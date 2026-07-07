@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "project": {
+    "language": "csharp",
+    "dotnetVersion": "net8.0",
+    "mainProject": "",
+    "testProject": ""
+  },
+  "features": {
+    "autoPrReview": true,
+    "labelTriggers": true,
+    "ciFeedback": true,
+    "readyCheck": true,
+    "architectureFeedback": true,
+    "documentationFeedback": true,
+    "kevinScaffolding": true,
+    "kevinXmlDocs": true,
+    "kevinTestScaffolding": true,
+    "kevinSmallImplementations": true
+  },
+  "policies": {
+    "allowFunctionalCodeGeneration": true,
+    "maxKevinChangedFiles": 4,
+    "maxKevinDiffLines": 250,
+    "requireStudentReviewForAgentPr": true,
+    "directBranchUpdates": false,
+    "multiAgentReviewForLargePrs": true
+  }
+}

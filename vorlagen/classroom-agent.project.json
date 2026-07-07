@@ -1,0 +1,6 @@
+{
+  "agent_workflow": {
+    "workflow": "project-agent-workflows",
+    "exercise": "project"
+  }
+}

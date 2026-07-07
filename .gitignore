@@ -1,0 +1,36 @@
+# macOS and editor files
+.DS_Store
+._*
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Local previews and generated artifacts
+.liascript/
+liascript-cache/
+dist/
+build/
+site/
+_site/
+.cache/
+
+# Exported presentation/document formats
+*.pdf
+*.pptx
+*.docx
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+
+# Secrets must never be committed
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/

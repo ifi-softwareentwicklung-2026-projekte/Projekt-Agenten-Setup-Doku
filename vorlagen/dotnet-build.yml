@@ -1,0 +1,32 @@
+name: dotnet-build
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  dotnet-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore and build C# projects
+        shell: bash
+        run: |
+          shopt -s globstar nullglob
+          projects=(**/*.csproj)
+          if [ ${#projects[@]} -eq 0 ]; then
+            echo "No .csproj files found yet; skipping dotnet build."
+            exit 0
+          fi
+          for project in "${projects[@]}"; do
+            dotnet restore "$project"
+            dotnet build "$project" --configuration Release --no-restore
+          done
