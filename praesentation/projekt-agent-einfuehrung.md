@@ -2,7 +2,7 @@
 
 author:   Softwareentwicklung TUBAF
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.1.0
+version:  1.2.0
 language: de
 narrator: Deutsch Female
 comment:  Kurze Einführung in den Projekt-Agenten für freie C#-Projekt-Repositories
@@ -20,7 +20,7 @@ import: https://raw.githubusercontent.com/liascript-templates/plantUML/master/RE
 | ------------------ | ----------------- |
 | **Thema**          | Agenten-Unterstützung für freie C#-Projekte |
 | **Zielgruppe**     | Studierende in Projekt-Repositories |
-| **Dauer**          | ca. 10 bis 12 Minuten, maximal 15 Minuten mit kurzen Rückfragen |
+| **Dauer**          | ca. 12 bis 14 Minuten, maximal 15 Minuten mit kurzen Rückfragen |
 | **Ziel**           | Agent aktivieren, sinnvoll um Hilfe bitten und Feedback verantwortlich nutzen |
 | **Doku**           | https://github.com/ifi-softwareentwicklung-2026-projekte/Projekt-Agenten-Setup-Doku |
 
@@ -47,20 +47,62 @@ Issue -> Branch -> Pull Request -> CI + Review -> Merge
 
 ---------------------------------------------------------------------
 
-## 2. Vier Rollen, ein gemeinsamer Repository-Kontext
+## 2. Vier Rollen teilen die Unterstützung auf
 
-| Agent | Schwerpunkt | Typische Commands |
-| ----- | ----------- | ----------------- |
-| **Maria** | Planung, Setup und Dokumentation | `/breakdown`, `/setup`, `/docs` |
-| **Jürgen** | Architektur und Abhängigkeiten | `/architecture` |
-| **Lisa** | Reviews, Tests und Readiness | `/review`, `/tests`, `/ready-check` |
-| **Kevin** | Setup, Gerüste und kleine Opt-in-PRs | `/init`, `/scaffold`, `/implement-small` |
+| Agent | Hauptaufgabe |
+| ----- | ------------ |
+| **Maria** | Projekt planen und organisieren |
+| **Jürgen** | Architektur und Abhängigkeiten klären |
+| **Lisa** | Qualität, Tests und Reviews prüfen |
+| **Kevin** | Setup und kleine, klar begrenzte PRs vorbereiten |
 
-Die Antworten beziehen Issue-Text, Command-Zusatz und passende Repository-Dateien ein. Je konkreter eure Frage, desto hilfreicher das Ergebnis.
+Alle vier arbeiten mit Issue-Text, Command-Zusatz und passendem Repository-Kontext. Je konkreter eure Frage, desto hilfreicher das Ergebnis.
 
 ---------------------------------------------------------------------
 
-## 3. Aktivierung: Ein Issue und `/init`
+## 3. Maria und Jürgen: Erst planen, dann bauen
+
+**Maria** hilft dabei, aus einer Idee einen umsetzbaren nächsten Schritt zu machen:
+
+```text
+/breakdown   Projektidee in kleine Issues zerlegen
+/setup       Struktur, Build und CI klären
+/docs        README, Reflexion und Doku-Artefakte planen
+```
+
+**Jürgen** hilft bei technischen Entscheidungen vor der Implementierung:
+
+```text
+/architecture Verantwortlichkeiten, Schnittstellen und Abhängigkeiten prüfen
+```
+
+> Beide geben Orientierung. Sie nehmen euch keine fachlichen Entscheidungen ab.
+
+---------------------------------------------------------------------
+
+## 4. Lisa und Kevin: Qualität sichern und gezielt unterstützen
+
+**Lisa** prüft Pull Requests, Tests und Abgabebereitschaft:
+
+```text
+/review
+/tests
+/ready-check
+```
+
+**Kevin** bereitet das Setup, kleine Gerüste und – nur nach Opt-in – sehr kleine PRs vor:
+
+```text
+/init
+/scaffold
+/implement-small
+```
+
+> Kevin erstellt keine Komplettlösung und pusht nie direkt auf `main`.
+
+---------------------------------------------------------------------
+
+## 5. `/init` aktiviert und konfiguriert das Setup im Repository
 
 1. Erstellt ein Issue `Projekt-Agent aktivieren`.
 2. Kommentiert:
@@ -76,7 +118,14 @@ Die Antworten beziehen Issue-Text, Command-Zusatz und passende Repository-Dateie
 agent-config.json
 ```
 
-4. Prüft und merged die PR nach `main`.
+Diese Konfiguration bestimmt anschließend, wie euer Setup arbeitet, zum Beispiel:
+
+- ob Lisa PRs automatisch reviewed,
+- ob Labels Commands auslösen,
+- ob Kevin Code erzeugen darf und wie groß seine Änderungen sein dürfen,
+- ob Kevin überhaupt Workflow-Dateien ändern darf.
+
+4. Prüft die Setup-PR und merged sie nach `main`.
 
 Optional kann direkt der empfohlene .NET-Build-Workflow mitkommen:
 
@@ -88,7 +137,13 @@ Optional kann direkt der empfohlene .NET-Build-Workflow mitkommen:
 
 ---------------------------------------------------------------------
 
-## 4. Gute Agentenarbeit beginnt mit einem kleinen Issue
+## 6. Danach folgt euer normaler Projektablauf
+
+```text
+Kleines Issue -> Branch -> Pull Request -> CI + Lisa-Review -> Merge
+```
+
+Ein Issue gibt Menschen und Agenten den nötigen Kontext. Es sollte ein kleines, überprüfbares Ziel beschreiben.
 
 Schlecht:
 
@@ -112,7 +167,7 @@ Ein kleines Issue macht Planung, Implementierung, Tests und Review für Menschen
 
 ---------------------------------------------------------------------
 
-## 5. Beratung zuerst, Code nur wenn wirklich nötig
+## 7. Beratung zuerst, Code nur wenn wirklich nötig
 
 Auf Issues oder PRs könnt ihr gezielt fragen:
 
@@ -122,7 +177,6 @@ Auf Issues oder PRs könnt ihr gezielt fragen:
 /architecture Verantwortlichkeiten und Schnittstellen prüfen
 /tests        konkrete Testfälle und Testebenen planen
 /docs         README, API-Doku und Doku-Artefakte planen
-/scaffold     kleinstes Gerüst ohne Kernlogik vorschlagen
 /ready-check  belegte Stärken, Lücken und Blocker sammeln
 ```
 
@@ -136,7 +190,7 @@ Diese Beratung erzeugt keine komplette Projektlösung.
 
 ---------------------------------------------------------------------
 
-## 6. Lisa verbindet Anforderungen, Diff und passende Checks
+## 8. Lisa verbindet Anforderungen, Diff und passende Checks
 
 Lisa reviewed Pull Requests automatisch oder auf Wunsch mit:
 
@@ -161,7 +215,7 @@ Closes #12
 
 ---------------------------------------------------------------------
 
-## 7. Kevin arbeitet nur innerhalb enger Grenzen
+## 9. Kevin arbeitet nur innerhalb enger Grenzen
 
 Funktionale Änderungen sind standardmäßig deaktiviert. Für kleine Implementierungs-PRs braucht ihr den bewussten doppelten Opt-in:
 
@@ -184,7 +238,7 @@ Kevin pusht nie direkt auf `main`.
 
 ---------------------------------------------------------------------
 
-## 8. Dokumentation ist ein Workflow, nicht nur eine Datei
+## 10. Dokumentation ist ein Workflow, nicht nur eine Datei
 
 Mit `/docs` könnt ihr beschreiben, was ihr braucht, zum Beispiel:
 
@@ -199,34 +253,21 @@ Dokumentations-Workflows sollen begrenzt, reproduzierbar und mit minimalen Recht
 
 ---------------------------------------------------------------------
 
-## 9. Eure Verantwortung bleibt sichtbar
-
-Vor dem Merge:
-
-- [ ] Issue und PR beschreiben dasselbe Ziel.
-- [ ] Build und Tests wurden wirklich ausgeführt.
-- [ ] Lisa-Feedback wurde geprüft, nicht blind übernommen.
-- [ ] Kevin-Änderungen wurden verstanden.
-- [ ] README oder Reflexionsbericht sind bei Bedarf aktualisiert.
-- [ ] Keine Secrets oder unnötigen personenbezogenen Daten sind enthalten.
-
-Legt früh an:
-
-```text
-docs/reflexionsbericht.md
-```
-
-Notiert dort kurz, was ihr übernommen, abgelehnt und selbst geprüft habt.
-
----------------------------------------------------------------------
-
-## 10. Heute starten, Details später nachlesen
+## 11. Heute starten und verantwortlich abschließen
 
 1. Doku-Repo und Quickstart öffnen.
 2. Aktivierungs-Issue erstellen.
 3. `/init` kommentieren und Setup-PR prüfen.
 4. Erstes kleines Arbeits-Issue formulieren.
 5. PR mit CI und Lisa-Review abschließen.
+
+Vor jedem Merge kurz prüfen:
+
+- Issue und PR beschreiben dasselbe Ziel.
+- Build und Tests wurden wirklich ausgeführt.
+- Lisa-Feedback und Kevin-Änderungen wurden verstanden.
+- README oder Reflexionsbericht sind bei Bedarf aktualisiert.
+- Keine Secrets oder unnötigen personenbezogenen Daten sind enthalten.
 
 | Wenn ihr ... | dann lest ... |
 | ------------ | ------------- |
@@ -243,7 +284,7 @@ https://github.com/ifi-softwareentwicklung-2026-projekte/Projekt-Agenten-Setup-D
 
 ---------------------------------------------------------------------
 
-## 11. Fragen, Probleme oder Feedback?
+## 12. Fragen, Probleme oder Feedback?
 
 Meldet euch sehr gerne bei mir, wenn ihr:
 
