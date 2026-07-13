@@ -88,6 +88,9 @@ Weitere Grenzen:
 - `maxKevinChangedFiles`: Default `4`
 - `maxKevinDiffLines`: Default `250`
 - `directBranchUpdates`: muss `false` bleiben
+- `allowKevinWorkflowChanges`: Default `false`; nur fuer bewusst beauftragte Aenderungen unter `.github/workflows/` aktivieren
+
+Kevin fuehrt vor einem Push einen Restore-/Build-/Test-Preflight aus. Schlaegt dieser fehl, erstellt er keine PR.
 
 ## 5. Wichtige Features
 

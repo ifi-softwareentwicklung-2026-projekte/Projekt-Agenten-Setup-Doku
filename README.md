@@ -32,7 +32,7 @@ Wenn ihr direkt loslegen wollt:
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/ifi-softwareentwicklung-2026-projekte/Projekt-Agenten-Setup-Doku/main/praesentation/projekt-agent-einfuehrung.md#1)
 
-Die Praesentation ist fuer etwa 15 Minuten geplant und gibt Studierenden direkt umsetzbare erste Schritte an die Hand.
+Die Praesentation ist fuer etwa 10 bis 12 Minuten geplant und bleibt auch mit kurzen Rueckfragen unter 15 Minuten. Sie gibt Studierenden direkt umsetzbare erste Schritte an die Hand.
 
 ## Vorlagen
 

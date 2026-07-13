@@ -109,7 +109,13 @@ Gibt Testideen.
 /docs
 ```
 
-Gibt Hinweise zu README, XML-Kommentaren und Reflexionsbericht.
+Gibt Hinweise zu README, XML-Kommentaren, Reflexionsbericht und reproduzierbaren Dokumentationsartefakten. Beschreibt das gewuenschte Ergebnis direkt hinter dem Command, zum Beispiel:
+
+```text
+/docs Plane HTML und PDF fuer Pull Requests und manuellen Start. Kein taeglicher Lauf.
+```
+
+Wenn Kevin dafuer eine Datei unter `.github/workflows/` aendern soll, braucht ihr zusaetzlich den Policy-Opt-in `allowKevinWorkflowChanges`.
 
 ## 6. Kevin nur bewusst aktivieren
 
@@ -132,7 +138,7 @@ Dann koennt ihr auf einem Issue schreiben:
 /implement-small Bitte ergaenze nur eine Guard-Clause in PlayerNameValidator und einen kleinen Unit-Test. Keine neue Dependency.
 ```
 
-Kevin erstellt nur Pull Requests, nie direkte `main`-Commits. Ihr muesst Kevins PR selbst fachlich pruefen.
+Kevin erstellt nur Pull Requests, nie direkte `main`-Commits. Vor dem Push prueft er Scope, Datei-/Diff-Grenzen sowie `dotnet build` und `dotnet test`. Bei einem fehlgeschlagenen Preflight entsteht keine PR. Ihr muesst Kevins PR trotzdem selbst fachlich pruefen.
 
 ## 7. Reflexionsbericht
 

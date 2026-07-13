@@ -2,7 +2,7 @@
 
 author:   Softwareentwicklung TUBAF
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.0
+version:  1.1.0
 language: de
 narrator: Deutsch Female
 comment:  Kurze Einfuehrung in den Projekt-Agenten fuer freie C#-Projekt-Repositories
@@ -18,260 +18,197 @@ import: https://raw.githubusercontent.com/liascript-templates/plantUML/master/RE
 
 | Parameter          | Kursinformationen |
 | ------------------ | ----------------- |
-| **Thema**          | Projekt-Agent fuer freie C#-Projekte |
+| **Thema**          | Agenten-Unterstuetzung fuer freie C#-Projekte |
 | **Zielgruppe**     | Studierende in Projekt-Repositories |
-| **Dauer**          | ca. 15 Minuten |
-| **Ziel**           | Erste eigene Schritte mit `/init`, Issues, PRs, Reviews und Kevin-Opt-in |
+| **Dauer**          | ca. 10 bis 12 Minuten, maximal 15 Minuten mit kurzen Rueckfragen |
+| **Ziel**           | Agent aktivieren, sinnvoll um Hilfe bitten und Feedback verantwortlich nutzen |
 | **Doku**           | https://github.com/ifi-softwareentwicklung-2026-projekte/Projekt-Agenten-Setup-Doku |
 
-> Nach dieser kurzen Einfuehrung koennt ihr euer Projekt-Repository aktivieren, einen sinnvollen PR-Workflow nutzen und gezielt Hilfe vom Agenten anfordern.
+> Der Agent begleitet euren normalen GitHub-Workflow. Er ersetzt weder eure fachlichen Entscheidungen noch eure Verantwortung fuer Code und Tests.
 
 ---------------------------------------------------------------------
 
-## 1. Was ist der Projekt-Agent?
+## 1. Ein Agenten-Team begleitet euren Projektalltag
 
-Der Projekt-Agent ist ein Agenten-Team in GitHub.
+Der Projekt-Agent hilft direkt in Issues und Pull Requests:
 
-Er hilft euch bei:
+- Ideen in kleine Aufgaben zerlegen
+- Setup, Architektur, Tests und Dokumentation klaeren
+- Pull Requests mit Repository- und CI-Kontext reviewen
+- optional kleine, klar begrenzte Aenderungen als PR vorbereiten
 
-- Pull-Request-Reviews
-- Projektstruktur und Setup
-- Architekturfragen
-- Tests und CI
-- Dokumentation und Reflexion
-- optional kleinen Kevin-Implementierungs-PRs
+Dabei bleibt der normale Entwicklungsprozess erhalten:
 
-Wichtig:
+```text
+Issue -> Branch -> Pull Request -> CI + Review -> Merge
+```
 
-> Der Agent ist eine Lern- und Qualitaetshilfe. Er ersetzt nicht eure eigene Verantwortung fuer Code, Tests und fachliche Entscheidungen.
-
----------------------------------------------------------------------
-
-## 2. Die vier Rollen
-
-| Agent | Rolle | Wann nutzen? |
-| ----- | ----- | ------------ |
-| Lisa | Reviewerin | PR pruefen lassen |
-| Maria | Setup und Struktur | Projekt ordnen, Issues schneiden, Doku verbessern |
-| Juergen | Architektur | Verantwortlichkeiten und Schnittstellen klaeren |
-| Kevin | kleine PRs | nur nach Opt-in und nur fuer klar begrenzte Aufgaben |
-
-Merksatz:
-
-> Lisa reviewed, Maria sortiert, Juergen hinterfragt, Kevin baut nur kleine Hilfen.
+> Der Agent liefert Orientierung und ein zweites Paar Augen. Entscheiden und verantworten muesst ihr selbst.
 
 ---------------------------------------------------------------------
 
-## 3. Schritt 1: Projekt aktivieren
+## 2. Vier Rollen, ein gemeinsamer Repository-Kontext
 
-Wenn euer Projekt-Repository noch keinen Agenten hat:
+| Agent | Schwerpunkt | Typische Commands |
+| ----- | ----------- | ----------------- |
+| **Maria** | Planung, Setup und Dokumentation | `/breakdown`, `/setup`, `/docs` |
+| **Juergen** | Architektur und Abhaengigkeiten | `/architecture` |
+| **Lisa** | Reviews, Tests und Readiness | `/review`, `/tests`, `/ready-check` |
+| **Kevin** | Setup, Gerueste und kleine Opt-in-PRs | `/init`, `/scaffold`, `/implement-small` |
 
-1. Erstellt ein Issue mit dem Titel `Projekt-Agent aktivieren`.
-2. Kommentiert im Issue:
+Die Antworten beziehen Issue-Text, Command-Zusatz und passende Repository-Dateien ein. Je konkreter eure Frage, desto hilfreicher das Ergebnis.
+
+---------------------------------------------------------------------
+
+## 3. Aktivierung: Ein Issue und `/init`
+
+1. Erstellt ein Issue `Projekt-Agent aktivieren`.
+2. Kommentiert:
 
 ```text
 /init
 ```
 
-3. Kevin erstellt eine Setup-PR.
-4. Ihr prueft die PR.
-5. Ihr merged die PR nach `main`.
-
-Danach ist der Projekt-Agent dauerhaft aktiv.
-
-> Wenn `/init` nicht reagiert, fragt Tutor/Admin. Die GitHub App muss installiert sein und Bootstrap muss fuer die Organisation freigegeben sein.
-
----------------------------------------------------------------------
-
-## 4. Was macht die Setup-PR?
-
-Die Setup-PR fuegt normalerweise zwei Dateien hinzu:
+3. Kevin erstellt eine Setup-PR mit:
 
 ```text
 .github/classroom-agent.json
 agent-config.json
 ```
 
-Minimaler Inhalt von `.github/classroom-agent.json`:
+4. Prueft und merged die PR nach `main`.
 
-```json
-{
-  "agent_workflow": {
-    "workflow": "project-agent-workflows",
-    "exercise": "project"
-  }
-}
-```
-
-Die Datei sagt dem Server: Dieses Repository ist ein Projekt-Repository.
-
----------------------------------------------------------------------
-
-## 5. Optional: CI direkt mit anlegen
-
-Plain `/init` legt bewusst nur das Basis-Setup an.
-
-Wenn ihr den vorgeschlagenen Dotnet-Build-Workflow direkt mit anlegen wollt:
+Optional kann direkt der empfohlene .NET-Build-Workflow mitkommen:
 
 ```text
 /init --with-dotnet-build
 ```
 
-Der Check heisst:
-
-```text
-dotnet-build
-```
-
-Warum ist das wichtig?
-
-- Lisa kann auf CI warten.
-- Rote Builds werden im Review sichtbar.
-- Ihr habt direkt Feedback, ob euer PR baut.
-
-In der Projekte-Organisation hat die GitHub App die noetigen Rechte dafuer. Wenn ihr CI spaeter nachruesten wollt, koennt ihr die Vorlage aus `vorlagen/dotnet-build.yml` manuell kopieren.
+> Wenn `/init` nicht reagiert, prueft die App-Installation oder fragt Tutor/Admin.
 
 ---------------------------------------------------------------------
 
-## 6. Euer normaler Projekt-Workflow
+## 4. Gute Agentenarbeit beginnt mit einem kleinen Issue
 
-So soll ein kleiner Arbeitsschritt aussehen:
+Schlecht:
 
 ```text
-Issue -> Branch -> Pull Request -> Review -> Merge
+Mach die Benutzerverwaltung fertig.
 ```
 
-Konkret:
-
-1. Issue fuer eine kleine Aufgabe erstellen.
-2. Branch anlegen, z.B. `feat/save-game-dto`.
-3. Kleine Aenderung implementieren.
-4. Lokal bauen und testen.
-5. PR nach `main` oeffnen.
-6. Im PR-Body `Closes #12` eintragen.
-7. Lisa-Review und CI abwarten.
-8. Feedback einarbeiten.
-9. Erst dann mergen.
-
----------------------------------------------------------------------
-
-## 7. Beispiel fuer ein gutes Issue
+Besser:
 
 ```markdown
-# SaveGameDto vorbereiten
+# Leere Anzeigenamen ablehnen
 
 Akzeptanzkriterien:
-- Klasse `SaveGameDto` liegt unter `src/Game/Storage/`.
-- Properties: `PlayerName`, `Score`, `CreatedAt`.
-- Keine Datei-I/O-Logik.
-- Ein kleiner Serialisierungs-Test ist vorhanden oder begruendet nicht vorhanden.
+- PlayerNameValidator lehnt leere Namen ab.
+- Die Fehlermeldung ist fuer CLI-Nutzer verstaendlich.
+- Ein Unit-Test deckt den Fehlerfall ab.
+- Keine neue Dependency.
 ```
 
-Warum ist das gut?
-
-- klein genug fuer einen PR
-- klare Akzeptanzkriterien
-- kein komplettes Feature-Paket
-- gut reviewbar
+Ein kleines Issue macht Planung, Implementierung, Tests und Review fuer Menschen und Agenten nachvollziehbar.
 
 ---------------------------------------------------------------------
 
-## 8. Review anfordern
+## 5. Beratung zuerst, Code nur wenn wirklich noetig
 
-Auf einer Pull Request:
+Auf Issues oder PRs koennt ihr gezielt fragen:
+
+```text
+/breakdown    grosse Idee in naechste Issues zerlegen
+/setup        Build, Struktur und CI klaeren
+/architecture Verantwortlichkeiten und Schnittstellen pruefen
+/tests        konkrete Testfaelle und Testebenen planen
+/docs         README, API-Doku und Doku-Artefakte planen
+/scaffold     kleinstes Geruest ohne Kernlogik vorschlagen
+/ready-check  belegte Staerken, Luecken und Blocker sammeln
+```
+
+Zusatztext gehoert direkt hinter den Command:
+
+```text
+/docs Plane HTML und PDF fuer Pull Requests und manuellen Start. Kein taeglicher Lauf.
+```
+
+Diese Beratung erzeugt keine komplette Projektloesung.
+
+---------------------------------------------------------------------
+
+## 6. Lisa verbindet Anforderungen, Diff und passende Checks
+
+Lisa reviewed Pull Requests automatisch oder auf Wunsch mit:
 
 ```text
 /review
 ```
 
-Lisa schaut dann auf:
+Sie beruecksichtigt unter anderem:
 
-- geaenderte Dateien
-- README und Projektdoku
-- Projektdateien und Workflows
-- CI-Status und Logs
-- PR-Body und Issue-Link
+- geaenderte und geloeschte Dateien
+- PR-Beschreibung und verknuepfte Issue-Akzeptanzkriterien
+- Code, Tests, README, Konfiguration und Workflows
+- vorhandene relevante CI-Checks und Fehlermeldungen
 
-Wenn ein Issue-Link fehlt, reviewed Lisa trotzdem, markiert es aber als Workflow-Hinweis.
-
----------------------------------------------------------------------
-
-## 9. Hilfe ohne Codegenerierung
-
-Diese Commands koennt ihr jederzeit nutzen:
+Verlinkt das Issue im PR-Body:
 
 ```text
-/breakdown
-/setup
-/architecture
-/tests
-/docs
-/ready-check
+Closes #12
 ```
 
-Beispiele:
-
-- `/breakdown`: Aus grosser Idee kleine Issues machen.
-- `/setup`: Build, README und CI klaeren.
-- `/architecture`: Klassen und Verantwortlichkeiten diskutieren.
-- `/tests`: Testideen sammeln.
-- `/docs`: README und Reflexionsbericht verbessern.
-
-Das erzeugt keine komplette Loesung, sondern hilft euch beim Arbeiten.
+> Ein gruener Check ist Evidenz, aber kein Ersatz fuer euer fachliches Urteil.
 
 ---------------------------------------------------------------------
 
-## 10. Kevin: nur mit Opt-in
+## 7. Kevin arbeitet nur innerhalb enger Grenzen
 
-Kevin darf standardmaessig keinen funktionalen Code erzeugen.
-
-Fuer kleine Implementierungs-PRs braucht ihr beide Schalter in `agent-config.json`:
+Funktionale Aenderungen sind standardmaessig deaktiviert. Fuer kleine Implementierungs-PRs braucht ihr den bewussten doppelten Opt-in:
 
 ```json
 {
-  "features": {
-    "kevinSmallImplementations": true
-  },
-  "policies": {
-    "allowFunctionalCodeGeneration": true
-  }
+  "features": { "kevinSmallImplementations": true },
+  "policies": { "allowFunctionalCodeGeneration": true }
 }
 ```
 
-Dann koennt ihr schreiben:
+Danach zum Beispiel:
 
 ```text
-/implement-small Bitte ergaenze nur die Validierung fuer leere Namen in PlayerNameValidator und einen kleinen Unit-Test. Keine neue Dependency.
+/implement-small Ergaenze nur die Validierung aus diesem Issue und den beschriebenen Unit-Test. Keine neue Dependency.
 ```
 
-Kevin erstellt nur Pull Requests, nie direkte `main`-Commits.
+Kevin prueft vor dem Push Scope, erlaubte Pfade, Datei-/Diff-Grenzen sowie `dotnet build` und `dotnet test`. Bei einem Fehler entsteht keine PR.
+
+Kevin pusht nie direkt auf `main`.
 
 ---------------------------------------------------------------------
 
-## 11. Was Kevin nicht machen soll
+## 8. Dokumentation ist ein Workflow, nicht nur eine Datei
 
-Nicht geeignet:
+Mit `/docs` koennt ihr beschreiben, was ihr braucht, zum Beispiel:
 
-- `Mach das Feature fertig`
-- komplette Persistenz bauen
-- Architektur umbauen
-- neue Frameworks einfuehren
-- mehrere Features gleichzeitig
-- Code uebernehmen, den ihr nicht versteht
+- README und Reflexionsbericht
+- XML-Kommentare fuer oeffentliche APIs
+- HTML-, PDF-, XML- oder LaTeX-Artefakte
+- Ausfuehrung bei PRs, manuell oder nach einem gewuenschten Zeitplan
 
-Geeignet:
+Dokumentations-Workflows sollen begrenzt, reproduzierbar und mit minimalen Rechten laufen. Kevin darf Dateien unter `.github/workflows/` nur mit einem zusaetzlichen Policy-Opt-in aendern.
 
-- kleines DTO
-- ein kleiner Test
-- Guard-Clause in benannter Klasse
-- README-Abschnitt
-- XML-Kommentar
-
-> Ihr bleibt verantwortlich fuer jeden Commit, den ihr merged.
+> Die konkrete Konfiguration und Beispiele stehen im Doku-Repo. Fuer den Vortrag reicht: Sagt hinter `/docs`, welches Ergebnis und welchen Ausloeser ihr braucht.
 
 ---------------------------------------------------------------------
 
-## 12. Reflexionsbericht und Datenschutz
+## 9. Eure Verantwortung bleibt sichtbar
+
+Vor dem Merge:
+
+- [ ] Issue und PR beschreiben dasselbe Ziel.
+- [ ] Build und Tests wurden wirklich ausgefuehrt.
+- [ ] Lisa-Feedback wurde geprueft, nicht blind uebernommen.
+- [ ] Kevin-Aenderungen wurden verstanden.
+- [ ] README oder Reflexionsbericht sind bei Bedarf aktualisiert.
+- [ ] Keine Secrets oder unnoetigen personenbezogenen Daten sind enthalten.
 
 Legt frueh an:
 
@@ -279,67 +216,27 @@ Legt frueh an:
 docs/reflexionsbericht.md
 ```
 
-Notiert kurz:
-
-- Welche Agenten habt ihr genutzt?
-- Was habt ihr uebernommen?
-- Was habt ihr abgelehnt?
-- Welche Tests habt ihr selbst ausgefuehrt?
-
-Nicht posten:
-
-- Tokens
-- Passwoerter
-- API-Keys
-- private Keys
-- unnoetige personenbezogene Daten
+Notiert dort kurz, was ihr uebernommen, abgelehnt und selbst geprueft habt.
 
 ---------------------------------------------------------------------
 
-## 13. Erste Schritte nach dieser Session
+## 10. Heute starten, Details spaeter nachlesen
 
-Macht heute noch diese 5 Schritte:
+1. Doku-Repo und Quickstart oeffnen.
+2. Aktivierungs-Issue erstellen.
+3. `/init` kommentieren und Setup-PR pruefen.
+4. Erstes kleines Arbeits-Issue formulieren.
+5. PR mit CI und Lisa-Review abschliessen.
 
-1. Doku-Repo oeffnen.
-2. Quickstart lesen.
-3. Im Projekt-Repo Issue `Projekt-Agent aktivieren` erstellen.
-4. `/init` kommentieren.
-5. Setup-PR pruefen und mergen.
-
-Danach fuer euren ersten echten Arbeitsschritt:
-
-1. kleines Issue schreiben
-2. Branch erstellen
-3. PR oeffnen
-4. `/review` nutzen
-
----------------------------------------------------------------------
-
-## 14. Wo finde ich Hilfe?
-
-| Frage | Dokument |
-| ----- | -------- |
-| Schnell starten | `docs/quickstart.md` |
-| Alles verstehen | `docs/handbuch.md` |
-| Konkrete Ablaufe | `docs/workflows.md` |
-| Config erklaeren | `docs/konfiguration.md` |
-| Fehler beheben | `docs/faq.md` |
+| Wenn ihr ... | dann lest ... |
+| ------------ | ------------- |
+| schnell starten wollt | `docs/quickstart.md` |
+| einen konkreten Ablauf sucht | `docs/workflows.md` |
+| Policies und Opt-ins braucht | `docs/konfiguration.md` |
+| einen Fehler sucht | `docs/faq.md` |
 
 Repo:
 
 https://github.com/ifi-softwareentwicklung-2026-projekte/Projekt-Agenten-Setup-Doku
-
----------------------------------------------------------------------
-
-## 15. Mini-Checkliste
-
-Vor jedem Merge kurz pruefen:
-
-- [ ] PR ist klein genug.
-- [ ] Issue ist verlinkt oder bewusst nicht vorhanden.
-- [ ] Build/Test-Befehle wurden ausgefuehrt.
-- [ ] Lisa-Feedback wurde gelesen.
-- [ ] README oder Reflexionsbericht sind aktualisiert, wenn noetig.
-- [ ] Kevin-Code wurde verstanden, falls Kevin beteiligt war.
 
 > Ziel ist nicht, den Agenten moeglichst viel machen zu lassen. Ziel ist, mit seiner Hilfe bewusster und sauberer zu arbeiten.

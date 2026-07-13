@@ -133,7 +133,7 @@ Guter Kontext:
 ## 8. Doku verbessern
 
 ```text
-/docs
+/docs Plane HTML und PDF fuer Pull Requests und manuellen Start. Kein taeglicher Lauf.
 ```
 
 Sinnvolle Dateien:
@@ -142,6 +142,8 @@ Sinnvolle Dateien:
 - `docs/reflexionsbericht.md`
 - `docs/architektur.md`
 - XML-Kommentare fuer oeffentliche APIs
+
+Gebt Artefakte und Ausloeser direkt hinter `/docs` an. Soll Kevin dafuer einen GitHub-Actions-Workflow aendern, braucht ihr zusaetzlich `policies.allowKevinWorkflowChanges=true`. Dokumentations-Workflows sollten eine Laufzeitgrenze, minimale Leserechte und eine begrenzte Artefaktaufbewahrung verwenden.
 
 ## 9. Kevin fuer kleine Implementierung nutzen
 
