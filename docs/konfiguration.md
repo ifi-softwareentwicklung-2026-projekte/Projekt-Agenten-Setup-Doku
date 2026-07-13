@@ -57,9 +57,32 @@ Review-only-Startkonfiguration:
   },
   "policies": {
     "allowFunctionalCodeGeneration": false,
+    "allowKevinWorkflowChanges": false,
     "maxKevinChangedFiles": 4,
     "maxKevinDiffLines": 250,
     "directBranchUpdates": false
+  },
+  "documentation": {
+    "generator": "doxygen",
+    "artifacts": ["html", "pdf"],
+    "artifactPaths": {
+      "html": "docs/api/html/index.html",
+      "pdf": "docs/api/latex/refman.pdf",
+      "xml": "docs/api/xml/index.xml",
+      "latex": "docs/api/latex/refman.tex"
+    },
+    "outputDirectory": "docs/api",
+    "mainPage": "README.md",
+    "documentPublicApi": true,
+    "failOnWarnings": true,
+    "triggers": {
+      "pullRequest": true,
+      "manual": true,
+      "pushBranches": [],
+      "schedule": null
+    },
+    "maxRuntimeMinutes": 20,
+    "retentionDays": 7
   }
 }
 ```
@@ -92,6 +115,8 @@ Weitere Grenzen:
 
 Kevin fuehrt vor einem Push einen Restore-/Build-/Test-Preflight aus. Schlaegt dieser fehl, erstellt er keine PR.
 
+Workflow-Aenderungen benoetigen zusaetzlich `allowKevinWorkflowChanges=true`. Dieser Schalter bleibt auch in der Kevin-Opt-in-Vorlage sicherheitshalber aus, bis ein konkreter Workflow-Auftrag vorliegt.
+
 ## 5. Wichtige Features
 
 `features.autoPrReview`
@@ -110,7 +135,42 @@ Kevin fuehrt vor einem Push einen Restore-/Build-/Test-Preflight aus. Schlaegt d
 - Default: `false`
 - Muss fuer Kevin-Implementierungs-PRs aktiv sein.
 
-## 6. Labels
+## 6. Dokumentationsworkflow
+
+Der Root-Schluessel heisst `documentation`. Der interne Name `documentation_config` ist kein gueltiger Schluessel fuer `agent-config.json`.
+
+| Feld | Default | Bedeutung |
+|---|---|---|
+| `generator` | `doxygen` | bevorzugter Dokumentationsgenerator |
+| `artifacts` | `html`, `pdf` | erlaubte Werte: `html`, `pdf`, `xml`, `latex` |
+| `artifactPaths` | siehe Beispiel | kanonische repository-relative Zielpfade |
+| `outputDirectory` | `docs/api` | gemeinsamer Generator-Ausgabeordner |
+| `mainPage` | `README.md` | echte HTML-Startseite |
+| `documentPublicApi` | `true` | oeffentliche Typen und Member muessen inhaltlich dokumentiert sein |
+| `failOnWarnings` | `true` | Generatorwarnungen lassen CI fehlschlagen |
+| `triggers.pullRequest` | `true` | Lauf bei Pull Requests |
+| `triggers.manual` | `true` | manueller `workflow_dispatch` |
+| `triggers.pushBranches` | `[]` | optionale Push-Branches, zum Beispiel `["main"]` |
+| `triggers.schedule` | `null` | optionaler Cron-Ausdruck in UTC, zum Beispiel `"0 3 * * *"` |
+| `maxRuntimeMinutes` | `20` | erlaubter Bereich `5` bis `30` Minuten |
+| `retentionDays` | `7` | erlaubter Bereich `1` bis `30` Tage |
+
+Absolute Pfade, `../`-Traversal, unbekannte Artefakte, unsichere Branchnamen und ungueltige Cron-Felder werden auf sichere Werte zurueckgesetzt. Sind alle Ausloeser deaktiviert, bleibt der manuelle Start als Fallback aktiv.
+
+Text hinter `/docs` darf diese Werte fuer die aktuelle Antwort ueberschreiben. Die konfigurierte maximale Laufzeit darf dabei nur verkuerzt, nicht erhoeht werden. Bei Abweichungen zeigt Maria einen JSON-Patch mit Pfaden wie `/documentation/artifacts`.
+
+Sicherheitsvertrag fuer erzeugte Workflows:
+
+- `permissions: contents: read`
+- Checkout mit `persist-credentials: false`
+- abbrechbare Concurrency
+- explizites `timeout-minutes`
+- begrenztes `retention-days`
+- `apt-get --no-install-recommends`, kein `texlive-full`
+- keine LaTeX-Installation fuer HTML-only
+- Doxygen mit README-Hauptseite, `EXTRACT_ALL = NO`, Warnungen fuer undokumentierte APIs und `WARN_AS_ERROR`
+
+## 7. Labels
 
 Issue-Labels:
 
@@ -135,7 +195,7 @@ PR-Labels:
 - `agent:setup`
 - `agent:scaffold`
 
-## 7. CI-Check `dotnet-build`
+## 8. CI-Check `dotnet-build`
 
 Der Server erwartet standardmaessig den Check-Namen `dotnet-build`, wenn automatische Reviews auf CI warten sollen.
 

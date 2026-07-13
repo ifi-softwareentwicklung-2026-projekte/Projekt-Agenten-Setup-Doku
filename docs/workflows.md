@@ -133,7 +133,7 @@ Guter Kontext:
 ## 8. Doku verbessern
 
 ```text
-/docs Plane HTML und PDF fuer Pull Requests und manuellen Start. Kein taeglicher Lauf.
+/docs Plane HTML und PDF fuer Pull Requests und manuellen Start. Kein taeglicher Lauf, maximal 20 Minuten, Artefakte 7 Tage aufbewahren.
 ```
 
 Sinnvolle Dateien:
@@ -143,7 +143,31 @@ Sinnvolle Dateien:
 - `docs/architektur.md`
 - XML-Kommentare fuer oeffentliche APIs
 
-Gebt Artefakte und Ausloeser direkt hinter `/docs` an. Soll Kevin dafuer einen GitHub-Actions-Workflow aendern, braucht ihr zusaetzlich `policies.allowKevinWorkflowChanges=true`. Dokumentations-Workflows sollten eine Laufzeitgrenze, minimale Leserechte und eine begrenzte Artefaktaufbewahrung verwenden.
+Gebt Artefakte, Ausloeser, Zeitplan, Laufzeit, Aufbewahrung und optional den Ausgabeordner direkt hinter `/docs` an. Beispiel fuer einen schnellen, einmaligen HTML-only-Vorschlag:
+
+```text
+/docs Erzeuge nur HTML, laufe ausschliesslich manuell, maximal 8 Minuten, bewahre das Artefakt 3 Tage auf und verwende site/api.
+```
+
+Ohne Zusatz gelten HTML + PDF, PR + manueller Start, kein Zeitplan, 20 Minuten und 7 Tage. Maria zeigt die effektive Konfiguration und bei Abweichungen einen Patch fuer `/documentation/...` in `agent-config.json`.
+
+Soll Kevin dafuer einen GitHub-Actions-Workflow aendern, braucht ihr zusaetzlich `policies.allowKevinWorkflowChanges=true`. Dieser Opt-in kommt zu `features.kevinSmallImplementations=true` und `policies.allowFunctionalCodeGeneration=true` hinzu.
+
+Prueft einen vorgeschlagenen Dokumentationsworkflow vor dem Merge:
+
+- [ ] nur konfigurierte Trigger; Cron-Zeit ist UTC
+- [ ] `permissions: contents: read`
+- [ ] Checkout mit `persist-credentials: false`
+- [ ] `concurrency.cancel-in-progress: true`
+- [ ] `timeout-minutes` nicht groesser als konfiguriert
+- [ ] `retention-days` nicht groesser als konfiguriert
+- [ ] `apt-get --no-install-recommends`, kein `texlive-full`
+- [ ] LaTeX nur fuer PDF/LaTeX
+- [ ] `USE_MDFILE_AS_MAINPAGE` zeigt auf die echte README
+- [ ] `EXTRACT_ALL = NO`, `WARN_IF_UNDOCUMENTED = YES`, `WARN_AS_ERROR = YES`
+- [ ] alle oeffentlichen C#-APIs sind inhaltlich dokumentiert
+
+Wenn ein passender Check wie `build-docs` noch laeuft, wartet Lisa mit dem automatischen Review. Ein erfolgreicher `dotnet-build` ist kein Ersatz fuer den Dokumentationscheck.
 
 ## 9. Kevin fuer kleine Implementierung nutzen
 

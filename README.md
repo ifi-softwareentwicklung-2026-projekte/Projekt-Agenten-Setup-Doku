@@ -4,6 +4,8 @@ Dieses Repository erklaert das Projekt-Agenten-Setup fuer freie C#-Projekt-Repos
 
 Der Projekt-Agent ist eine Lern- und Qualitaetshilfe. Er hilft bei Pull-Request-Reviews, Projektstruktur, CI, Tests, Dokumentation und optional bei kleinen Kevin-Implementierungs-PRs. Er ersetzt keine eigene Planung, Implementierung, Tests oder fachliche Verantwortung.
 
+Dokumentationsworkflows sind konfigurierbar: Teams koennen HTML, PDF, XML oder LaTeX, manuelle/PR-/Push-/Cron-Ausloeser, Laufzeit und Artefaktaufbewahrung dauerhaft in `agent-config.json` oder einmalig direkt hinter `/docs` festlegen. Ohne eigene Angaben gelten sichere, vollstaendige Defaults.
+
 ## Schnellstart
 
 Wenn ihr direkt loslegen wollt:
@@ -18,6 +20,7 @@ Wenn ihr direkt loslegen wollt:
 
 4. Prueft und merged die Setup-PR.
 5. Arbeitet danach mit Issues, Branches, Pull Requests und `/review`.
+6. Plant die Projektdokumentation frueh mit `/docs`; die Defaults erzeugen HTML und PDF bei PRs sowie manuell, ohne Zeitplan.
 
 ## Wichtigste Links
 
@@ -58,6 +61,8 @@ Minimal empfohlen:
 ```
 
 Der Agent funktioniert auch mit anderen Strukturen. Je klarer README, Build-Befehle, Tests und Projektdateien dokumentiert sind, desto hilfreicher sind Reviews.
+
+Fuer eine reproduzierbare API-Dokumentation kommen typischerweise `Doxyfile` und `.github/workflows/documentation.yml` hinzu. Generierte Dateien unter `docs/api/` werden als kurzlebige CI-Artefakte behandelt und nicht eingecheckt.
 
 ## Sicherheitsregel
 

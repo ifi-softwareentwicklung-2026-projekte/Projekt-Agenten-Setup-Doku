@@ -20,10 +20,36 @@
   },
   "policies": {
     "allowFunctionalCodeGeneration": false,
+    "allowKevinWorkflowChanges": false,
     "maxKevinChangedFiles": 4,
     "maxKevinDiffLines": 250,
     "requireStudentReviewForAgentPr": true,
     "directBranchUpdates": false,
     "multiAgentReviewForLargePrs": true
+  },
+  "documentation": {
+    "generator": "doxygen",
+    "artifacts": [
+      "html",
+      "pdf"
+    ],
+    "artifactPaths": {
+      "html": "docs/api/html/index.html",
+      "pdf": "docs/api/latex/refman.pdf",
+      "xml": "docs/api/xml/index.xml",
+      "latex": "docs/api/latex/refman.tex"
+    },
+    "outputDirectory": "docs/api",
+    "mainPage": "README.md",
+    "documentPublicApi": true,
+    "failOnWarnings": true,
+    "triggers": {
+      "pullRequest": true,
+      "manual": true,
+      "pushBranches": [],
+      "schedule": null
+    },
+    "maxRuntimeMinutes": 20,
+    "retentionDays": 7
   }
 }

@@ -115,6 +115,16 @@ Gibt Hinweise zu README, XML-Kommentaren, Reflexionsbericht und reproduzierbaren
 /docs Plane HTML und PDF fuer Pull Requests und manuellen Start. Kein taeglicher Lauf.
 ```
 
+Ohne Zusatz verwendet Maria sichere Defaults: HTML und PDF, Pull Requests und manueller Start, kein Zeitplan, maximal 20 Minuten und 7 Tage Aufbewahrung. README wird die HTML-Startseite; fehlende oeffentliche API-Dokumentation und Doxygen-Warnungen sollen den Lauf fehlschlagen lassen.
+
+Ihr koennt den Vorschlag in natuerlicher Sprache einmalig anpassen:
+
+```text
+/docs Erzeuge nur HTML, laufe ausschliesslich manuell, maximal 8 Minuten, bewahre das Artefakt 3 Tage auf und verwende site/api als Ausgabeordner.
+```
+
+Maria nennt zuerst die effektive Konfiguration. Bei Abweichungen zeigt sie einen kleinen Patch fuer `agent-config.json`; dessen Pfade beginnen mit `/documentation/...`. Dauerhafte Defaults stehen unter dem Root-Schluessel `documentation`.
+
 Wenn Kevin dafuer eine Datei unter `.github/workflows/` aendern soll, braucht ihr zusaetzlich den Policy-Opt-in `allowKevinWorkflowChanges`.
 
 ## 6. Kevin nur bewusst aktivieren
@@ -158,3 +168,5 @@ Schaut zuerst in die [FAQ](faq.md). Die haeufigsten Ursachen sind:
 - `agent-config.json` hat ungueltiges JSON.
 - `/init` wurde ohne `--with-dotnet-build` ausgefuehrt, obwohl ihr den CI-Workflow direkt mit anlegen wolltet.
 - Kevin-Opt-in fehlt.
+- Fuer einen Kevin-Dokumentationsworkflow fehlt `policies.allowKevinWorkflowChanges=true`.
+- Ein laufender `build-docs`-Check verzoegert Lisas automatisches Review absichtlich bis zum Abschluss.

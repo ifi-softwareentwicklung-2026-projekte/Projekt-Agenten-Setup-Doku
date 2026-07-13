@@ -33,7 +33,7 @@ Maria hilft bei Orientierung und Setup:
 - Projektstruktur
 - Build-Reproduzierbarkeit
 - Issue-Breakdown
-- README und Reflexionsbericht
+- README, Reflexionsbericht und reproduzierbare Dokumentationsworkflows
 
 ### Juergen
 
@@ -43,6 +43,8 @@ Juergen hilft bei Architekturfragen:
 - Schnittstellen
 - Abhaengigkeiten
 - Aufteilung grosser Aenderungen
+
+Juergen trennt dabei beobachteten Repository-Stand und Empfehlungen. Neue Projekte, Typen oder Dependencies sind Vorschlaege und werden nicht als bereits vorhanden dargestellt.
 
 ### Kevin
 
@@ -71,6 +73,9 @@ Einfacher ist meist `/init` auf einem Issue. Kevin erstellt dann eine Setup-PR. 
 - Label-Trigger aktiv
 - Kevin-Implementierungen deaktiviert
 - keine direkten `main`-Aenderungen durch Kevin
+- Dokumentation als HTML und PDF bei PRs sowie manuell
+- kein Dokumentations-Zeitplan, maximal 20 Minuten Laufzeit und 7 Tage Aufbewahrung
+- README als Startseite sowie vollstaendige oeffentliche API-Dokumentation
 
 Startempfehlung: Nutzt die Review-only-Vorlage [`../vorlagen/agent-config.review-only.json`](../vorlagen/agent-config.review-only.json).
 
@@ -85,6 +90,8 @@ Lisa sammelt Kontext aus:
 - Projektdateien und Workflows
 - CI-Status und CI-Logs, wenn vorhanden
 - PR-Body und Issue-Link
+
+Bei Dokumentationsaenderungen prueft Lisa zusaetzlich den konfigurierten Dokumentationsvertrag. Ein gruenes `dotnet-build` reicht nicht als Nachweis fuer Doxygen-Artefakte. Laeuft ein passender Dokumentationscheck noch, wartet das automatische Review bis zu dessen Abschluss.
 
 Wenn ihr manuell ein Review wollt:
 
@@ -139,6 +146,18 @@ Kevin braucht doppelten Opt-in:
 }
 ```
 
+Fuer Aenderungen unter `.github/workflows/` kommt ein dritter, separater Schalter hinzu:
+
+```json
+{
+  "policies": {
+    "allowKevinWorkflowChanges": true
+  }
+}
+```
+
+Lasst diesen Schalter `false`, solange Kevin keinen konkreten Workflow-Auftrag erhalten soll.
+
 Danach:
 
 ```text
@@ -147,7 +166,51 @@ Danach:
 
 Kevin prueft Scope, sichere Pfade, Datei-/Diff-Grenzen und Dotnet-Preflight. Wenn eine Grenze verletzt wird, erstellt Kevin keine PR.
 
-## 8. Reflexionsbericht
+## 8. Reproduzierbare Projektdokumentation
+
+`/docs` erstellt einen projektspezifischen Plan. Der Text direkt hinter dem Command darf fuer diese Antwort Artefakte, Ausloeser, Zeitplan, Ausgabeordner, Aufbewahrung und eine kuerzere Laufzeit festlegen:
+
+```text
+/docs Erzeuge nur HTML, laufe ausschliesslich manuell, maximal 8 Minuten, und bewahre das Artefakt 3 Tage auf.
+```
+
+Ohne Zusatz gelten:
+
+- Generator: Doxygen
+- Artefakte: HTML und PDF
+- Pfade: `docs/api/html/index.html` und `docs/api/latex/refman.pdf`
+- Startseite: `README.md`
+- Ausloeser: Pull Requests und `workflow_dispatch`
+- kein Push- oder Cron-Lauf
+- Laufzeitgrenze: 20 Minuten
+- Aufbewahrung: 7 Tage
+- vollstaendige Dokumentation oeffentlicher APIs
+- Generatorwarnungen als Fehler
+
+Eine einmalige `/docs`-Anweisung aendert das Repository nicht. Wenn der Wunsch von `agent-config.json` abweicht, zeigt Maria den kleinsten Patch unter dem echten Root-Schluessel `documentation`. Fuer eine dauerhafte Konfiguration uebernehmt und reviewed ihr diesen Patch selbst.
+
+Ein sicherer Workflow enthaelt mindestens:
+
+- `permissions: contents: read`
+- `actions/checkout` mit `persist-credentials: false`
+- `concurrency` mit `cancel-in-progress: true`
+- `timeout-minutes` nicht groesser als konfiguriert
+- `retention-days` nicht groesser als konfiguriert
+- `apt-get --no-install-recommends`; niemals pauschal `texlive-full`
+- LaTeX-Pakete nur fuer PDF oder LaTeX
+
+Bei Doxygen gilt fuer den Vollstaendigkeitscheck:
+
+```ini
+USE_MDFILE_AS_MAINPAGE = README.md
+EXTRACT_ALL = NO
+WARN_IF_UNDOCUMENTED = YES
+WARN_AS_ERROR = YES
+```
+
+Alle oeffentlichen C#-Typen und Member brauchen inhaltliche XML-Kommentare. Eine automatisch sichtbare Signaturliste ist keine vollstaendige API-Dokumentation.
+
+## 9. Reflexionsbericht
 
 Empfohlene Datei:
 
@@ -176,7 +239,7 @@ Moegliche Struktur:
 - ...
 ```
 
-## 9. Datenschutz und Grenzen
+## 10. Datenschutz und Grenzen
 
 Nicht posten:
 
@@ -188,7 +251,7 @@ Nicht posten:
 
 Agentenkommentare und technische Events koennen fuer Betreuung und Auswertung protokolliert werden.
 
-## 10. Gute Praxis
+## 11. Gute Praxis
 
 - Kleine Issues statt grosser Sammelaufgaben.
 - Kleine PRs statt Mega-PRs.
@@ -196,3 +259,4 @@ Agentenkommentare und technische Events koennen fuer Betreuung und Auswertung pr
 - Build- und Testbefehle im README dokumentieren.
 - Agentenfeedback pruefen, nicht blind uebernehmen.
 - Kevin nur fuer kleine, klar begrenzte Hilfsarbeiten nutzen.
+- Dokumentationsumfang und Workflow frueh festlegen; generierte Ausgaben als CI-Artefakte statt Git-Inhalt behandeln.
