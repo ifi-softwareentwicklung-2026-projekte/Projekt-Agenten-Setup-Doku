@@ -5,7 +5,7 @@ email:    sebastian.zug@informatik.tu-freiberg.de
 version:  1.1.0
 language: de
 narrator: Deutsch Female
-comment:  Kurze Einfuehrung in den Projekt-Agenten fuer freie C#-Projekt-Repositories
+comment:  Kurze Einführung in den Projekt-Agenten für freie C#-Projekt-Repositories
 
 import: https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
         https://github.com/liascript/CodeRunner
@@ -18,13 +18,13 @@ import: https://raw.githubusercontent.com/liascript-templates/plantUML/master/RE
 
 | Parameter          | Kursinformationen |
 | ------------------ | ----------------- |
-| **Thema**          | Agenten-Unterstuetzung fuer freie C#-Projekte |
+| **Thema**          | Agenten-Unterstützung für freie C#-Projekte |
 | **Zielgruppe**     | Studierende in Projekt-Repositories |
-| **Dauer**          | ca. 10 bis 12 Minuten, maximal 15 Minuten mit kurzen Rueckfragen |
+| **Dauer**          | ca. 10 bis 12 Minuten, maximal 15 Minuten mit kurzen Rückfragen |
 | **Ziel**           | Agent aktivieren, sinnvoll um Hilfe bitten und Feedback verantwortlich nutzen |
 | **Doku**           | https://github.com/ifi-softwareentwicklung-2026-projekte/Projekt-Agenten-Setup-Doku |
 
-> Der Agent begleitet euren normalen GitHub-Workflow. Er ersetzt weder eure fachlichen Entscheidungen noch eure Verantwortung fuer Code und Tests.
+> Der Agent begleitet euren normalen GitHub-Workflow. Er ersetzt weder eure fachlichen Entscheidungen noch eure Verantwortung für Code und Tests.
 
 ---------------------------------------------------------------------
 
@@ -33,9 +33,9 @@ import: https://raw.githubusercontent.com/liascript-templates/plantUML/master/RE
 Der Projekt-Agent hilft direkt in Issues und Pull Requests:
 
 - Ideen in kleine Aufgaben zerlegen
-- Setup, Architektur, Tests und Dokumentation klaeren
+- Setup, Architektur, Tests und Dokumentation klären
 - Pull Requests mit Repository- und CI-Kontext reviewen
-- optional kleine, klar begrenzte Aenderungen als PR vorbereiten
+- optional kleine, klar begrenzte Änderungen als PR vorbereiten
 
 Dabei bleibt der normale Entwicklungsprozess erhalten:
 
@@ -43,7 +43,7 @@ Dabei bleibt der normale Entwicklungsprozess erhalten:
 Issue -> Branch -> Pull Request -> CI + Review -> Merge
 ```
 
-> Der Agent liefert Orientierung und ein zweites Paar Augen. Entscheiden und verantworten muesst ihr selbst.
+> Der Agent liefert Orientierung und ein zweites Paar Augen. Entscheiden und verantworten müsst ihr selbst.
 
 ---------------------------------------------------------------------
 
@@ -52,9 +52,9 @@ Issue -> Branch -> Pull Request -> CI + Review -> Merge
 | Agent | Schwerpunkt | Typische Commands |
 | ----- | ----------- | ----------------- |
 | **Maria** | Planung, Setup und Dokumentation | `/breakdown`, `/setup`, `/docs` |
-| **Juergen** | Architektur und Abhaengigkeiten | `/architecture` |
+| **Jürgen** | Architektur und Abhängigkeiten | `/architecture` |
 | **Lisa** | Reviews, Tests und Readiness | `/review`, `/tests`, `/ready-check` |
-| **Kevin** | Setup, Gerueste und kleine Opt-in-PRs | `/init`, `/scaffold`, `/implement-small` |
+| **Kevin** | Setup, Gerüste und kleine Opt-in-PRs | `/init`, `/scaffold`, `/implement-small` |
 
 Die Antworten beziehen Issue-Text, Command-Zusatz und passende Repository-Dateien ein. Je konkreter eure Frage, desto hilfreicher das Ergebnis.
 
@@ -76,7 +76,7 @@ Die Antworten beziehen Issue-Text, Command-Zusatz und passende Repository-Dateie
 agent-config.json
 ```
 
-4. Prueft und merged die PR nach `main`.
+4. Prüft und merged die PR nach `main`.
 
 Optional kann direkt der empfohlene .NET-Build-Workflow mitkommen:
 
@@ -84,7 +84,7 @@ Optional kann direkt der empfohlene .NET-Build-Workflow mitkommen:
 /init --with-dotnet-build
 ```
 
-> Wenn `/init` nicht reagiert, prueft die App-Installation oder fragt Tutor/Admin.
+> Wenn `/init` nicht reagiert, prüft die App-Installation oder fragt Tutor/Admin.
 
 ---------------------------------------------------------------------
 
@@ -103,36 +103,36 @@ Besser:
 
 Akzeptanzkriterien:
 - PlayerNameValidator lehnt leere Namen ab.
-- Die Fehlermeldung ist fuer CLI-Nutzer verstaendlich.
+- Die Fehlermeldung ist für CLI-Nutzer verständlich.
 - Ein Unit-Test deckt den Fehlerfall ab.
 - Keine neue Dependency.
 ```
 
-Ein kleines Issue macht Planung, Implementierung, Tests und Review fuer Menschen und Agenten nachvollziehbar.
+Ein kleines Issue macht Planung, Implementierung, Tests und Review für Menschen und Agenten nachvollziehbar.
 
 ---------------------------------------------------------------------
 
-## 5. Beratung zuerst, Code nur wenn wirklich noetig
+## 5. Beratung zuerst, Code nur wenn wirklich nötig
 
-Auf Issues oder PRs koennt ihr gezielt fragen:
+Auf Issues oder PRs könnt ihr gezielt fragen:
 
 ```text
-/breakdown    grosse Idee in naechste Issues zerlegen
-/setup        Build, Struktur und CI klaeren
-/architecture Verantwortlichkeiten und Schnittstellen pruefen
-/tests        konkrete Testfaelle und Testebenen planen
+/breakdown    große Idee in nächste Issues zerlegen
+/setup        Build, Struktur und CI klären
+/architecture Verantwortlichkeiten und Schnittstellen prüfen
+/tests        konkrete Testfälle und Testebenen planen
 /docs         README, API-Doku und Doku-Artefakte planen
-/scaffold     kleinstes Geruest ohne Kernlogik vorschlagen
-/ready-check  belegte Staerken, Luecken und Blocker sammeln
+/scaffold     kleinstes Gerüst ohne Kernlogik vorschlagen
+/ready-check  belegte Stärken, Lücken und Blocker sammeln
 ```
 
-Zusatztext gehoert direkt hinter den Command:
+Zusatztext gehört direkt hinter den Command:
 
 ```text
-/docs Plane HTML und PDF fuer Pull Requests und manuellen Start. Kein taeglicher Lauf.
+/docs Plane HTML und PDF für Pull Requests und manuellen Start. Kein täglicher Lauf.
 ```
 
-Diese Beratung erzeugt keine komplette Projektloesung.
+Diese Beratung erzeugt keine komplette Projektlösung.
 
 ---------------------------------------------------------------------
 
@@ -144,10 +144,10 @@ Lisa reviewed Pull Requests automatisch oder auf Wunsch mit:
 /review
 ```
 
-Sie beruecksichtigt unter anderem:
+Sie berücksichtigt unter anderem:
 
-- geaenderte und geloeschte Dateien
-- PR-Beschreibung und verknuepfte Issue-Akzeptanzkriterien
+- geänderte und gelöschte Dateien
+- PR-Beschreibung und verknüpfte Issue-Akzeptanzkriterien
 - Code, Tests, README, Konfiguration und Workflows
 - vorhandene relevante CI-Checks und Fehlermeldungen
 
@@ -157,13 +157,13 @@ Verlinkt das Issue im PR-Body:
 Closes #12
 ```
 
-> Ein gruener Check ist Evidenz, aber kein Ersatz fuer euer fachliches Urteil.
+> Ein grüner Check ist Evidenz, aber kein Ersatz für euer fachliches Urteil.
 
 ---------------------------------------------------------------------
 
 ## 7. Kevin arbeitet nur innerhalb enger Grenzen
 
-Funktionale Aenderungen sind standardmaessig deaktiviert. Fuer kleine Implementierungs-PRs braucht ihr den bewussten doppelten Opt-in:
+Funktionale Änderungen sind standardmäßig deaktiviert. Für kleine Implementierungs-PRs braucht ihr den bewussten doppelten Opt-in:
 
 ```json
 {
@@ -175,10 +175,10 @@ Funktionale Aenderungen sind standardmaessig deaktiviert. Fuer kleine Implementi
 Danach zum Beispiel:
 
 ```text
-/implement-small Ergaenze nur die Validierung aus diesem Issue und den beschriebenen Unit-Test. Keine neue Dependency.
+/implement-small Ergänze nur die Validierung aus diesem Issue und den beschriebenen Unit-Test. Keine neue Dependency.
 ```
 
-Kevin prueft vor dem Push Scope, erlaubte Pfade, Datei-/Diff-Grenzen sowie `dotnet build` und `dotnet test`. Bei einem Fehler entsteht keine PR.
+Kevin prüft vor dem Push Scope, erlaubte Pfade, Datei-/Diff-Grenzen sowie `dotnet build` und `dotnet test`. Bei einem Fehler entsteht keine PR.
 
 Kevin pusht nie direkt auf `main`.
 
@@ -186,16 +186,16 @@ Kevin pusht nie direkt auf `main`.
 
 ## 8. Dokumentation ist ein Workflow, nicht nur eine Datei
 
-Mit `/docs` koennt ihr beschreiben, was ihr braucht, zum Beispiel:
+Mit `/docs` könnt ihr beschreiben, was ihr braucht, zum Beispiel:
 
 - README und Reflexionsbericht
-- XML-Kommentare fuer oeffentliche APIs
+- XML-Kommentare für öffentliche APIs
 - HTML-, PDF-, XML- oder LaTeX-Artefakte
-- Ausfuehrung bei PRs, manuell oder nach einem gewuenschten Zeitplan
+- Ausführung bei PRs, manuell oder nach einem gewünschten Zeitplan
 
-Dokumentations-Workflows sollen begrenzt, reproduzierbar und mit minimalen Rechten laufen. Kevin darf Dateien unter `.github/workflows/` nur mit einem zusaetzlichen Policy-Opt-in aendern.
+Dokumentations-Workflows sollen begrenzt, reproduzierbar und mit minimalen Rechten laufen. Kevin darf Dateien unter `.github/workflows/` nur mit einem zusätzlichen Policy-Opt-in ändern.
 
-> Die konkrete Konfiguration und Beispiele stehen im Doku-Repo. Fuer den Vortrag reicht: Sagt hinter `/docs`, welches Ergebnis und welchen Ausloeser ihr braucht.
+> Die konkrete Konfiguration und Beispiele stehen im Doku-Repo. Für den Vortrag reicht: Sagt hinter `/docs`, welches Ergebnis und welchen Auslöser ihr braucht.
 
 ---------------------------------------------------------------------
 
@@ -204,29 +204,29 @@ Dokumentations-Workflows sollen begrenzt, reproduzierbar und mit minimalen Recht
 Vor dem Merge:
 
 - [ ] Issue und PR beschreiben dasselbe Ziel.
-- [ ] Build und Tests wurden wirklich ausgefuehrt.
-- [ ] Lisa-Feedback wurde geprueft, nicht blind uebernommen.
-- [ ] Kevin-Aenderungen wurden verstanden.
+- [ ] Build und Tests wurden wirklich ausgeführt.
+- [ ] Lisa-Feedback wurde geprüft, nicht blind übernommen.
+- [ ] Kevin-Änderungen wurden verstanden.
 - [ ] README oder Reflexionsbericht sind bei Bedarf aktualisiert.
-- [ ] Keine Secrets oder unnoetigen personenbezogenen Daten sind enthalten.
+- [ ] Keine Secrets oder unnötigen personenbezogenen Daten sind enthalten.
 
-Legt frueh an:
+Legt früh an:
 
 ```text
 docs/reflexionsbericht.md
 ```
 
-Notiert dort kurz, was ihr uebernommen, abgelehnt und selbst geprueft habt.
+Notiert dort kurz, was ihr übernommen, abgelehnt und selbst geprüft habt.
 
 ---------------------------------------------------------------------
 
-## 10. Heute starten, Details spaeter nachlesen
+## 10. Heute starten, Details später nachlesen
 
-1. Doku-Repo und Quickstart oeffnen.
+1. Doku-Repo und Quickstart öffnen.
 2. Aktivierungs-Issue erstellen.
-3. `/init` kommentieren und Setup-PR pruefen.
+3. `/init` kommentieren und Setup-PR prüfen.
 4. Erstes kleines Arbeits-Issue formulieren.
-5. PR mit CI und Lisa-Review abschliessen.
+5. PR mit CI und Lisa-Review abschließen.
 
 | Wenn ihr ... | dann lest ... |
 | ------------ | ------------- |
@@ -239,4 +239,4 @@ Repo:
 
 https://github.com/ifi-softwareentwicklung-2026-projekte/Projekt-Agenten-Setup-Doku
 
-> Ziel ist nicht, den Agenten moeglichst viel machen zu lassen. Ziel ist, mit seiner Hilfe bewusster und sauberer zu arbeiten.
+> Ziel ist nicht, den Agenten möglichst viel machen zu lassen. Ziel ist, mit seiner Hilfe bewusster und sauberer zu arbeiten.
