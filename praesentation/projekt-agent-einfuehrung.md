@@ -240,3 +240,20 @@ Repo:
 https://github.com/ifi-softwareentwicklung-2026-projekte/Projekt-Agenten-Setup-Doku
 
 > Ziel ist nicht, den Agenten möglichst viel machen zu lassen. Ziel ist, mit seiner Hilfe bewusster und sauberer zu arbeiten.
+
+---------------------------------------------------------------------
+
+## 11. Fragen, Probleme oder Feedback?
+
+Meldet euch sehr gerne bei mir, wenn ihr:
+
+- Fragen zum Projekt-Agenten-Setup habt,
+- auf ein Problem stoßt,
+- Anmerkungen oder Verbesserungsvorschläge habt oder
+- Feedback aus der praktischen Nutzung geben möchtet.
+
+**Simon Hörtzsch**
+
+[Simon.Hoertzsch@student.tu-freiberg.de](mailto:Simon.Hoertzsch@student.tu-freiberg.de)
+
+> Eure Rückmeldungen helfen dabei, das Setup für alle Studierenden verständlicher und zuverlässiger zu machen.
