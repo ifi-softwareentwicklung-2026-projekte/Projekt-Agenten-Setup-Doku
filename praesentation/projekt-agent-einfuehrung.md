@@ -20,7 +20,7 @@ import: https://raw.githubusercontent.com/liascript-templates/plantUML/master/RE
 | ------------------ | ----------------- |
 | **Thema**          | Agenten-Unterstützung für freie C#-Projekte |
 | **Zielgruppe**     | Studierende in Projekt-Repositories |
-| **Dauer**          | ca. 12 bis 14 Minuten, maximal 15 Minuten mit kurzen Rückfragen |
+| **Dauer**          | ca. 10 bis 12 Minuten, maximal 15 Minuten mit kurzen Rückfragen |
 | **Ziel**           | Agent aktivieren, sinnvoll um Hilfe bitten und Feedback verantwortlich nutzen |
 | **Doku**           | https://github.com/ifi-softwareentwicklung-2026-projekte/Projekt-Agenten-Setup-Doku |
 
@@ -137,37 +137,7 @@ Optional kann direkt der empfohlene .NET-Build-Workflow mitkommen:
 
 ---------------------------------------------------------------------
 
-## 6. Danach folgt euer normaler Projektablauf
-
-```text
-Kleines Issue -> Branch -> Pull Request -> CI + Lisa-Review -> Merge
-```
-
-Ein Issue gibt Menschen und Agenten den nötigen Kontext. Es sollte ein kleines, überprüfbares Ziel beschreiben.
-
-Schlecht:
-
-```text
-Mach die Benutzerverwaltung fertig.
-```
-
-Besser:
-
-```markdown
-# Leere Anzeigenamen ablehnen
-
-Akzeptanzkriterien:
-- PlayerNameValidator lehnt leere Namen ab.
-- Die Fehlermeldung ist für CLI-Nutzer verständlich.
-- Ein Unit-Test deckt den Fehlerfall ab.
-- Keine neue Dependency.
-```
-
-Ein kleines Issue macht Planung, Implementierung, Tests und Review für Menschen und Agenten nachvollziehbar.
-
----------------------------------------------------------------------
-
-## 7. Beratung zuerst, Code nur wenn wirklich nötig
+## 6. Beratung zuerst, Code nur wenn wirklich nötig
 
 Auf Issues oder PRs könnt ihr gezielt fragen:
 
@@ -190,7 +160,7 @@ Diese Beratung erzeugt keine komplette Projektlösung.
 
 ---------------------------------------------------------------------
 
-## 8. Lisa verbindet Anforderungen, Diff und passende Checks
+## 7. Lisa verbindet Anforderungen, Diff und passende Checks
 
 Lisa reviewed Pull Requests automatisch oder auf Wunsch mit:
 
@@ -215,7 +185,7 @@ Closes #12
 
 ---------------------------------------------------------------------
 
-## 9. Kevin arbeitet nur innerhalb enger Grenzen
+## 8. Kevin arbeitet nur innerhalb enger Grenzen
 
 Funktionale Änderungen sind standardmäßig deaktiviert. Für kleine Implementierungs-PRs braucht ihr den bewussten doppelten Opt-in:
 
@@ -238,7 +208,7 @@ Kevin pusht nie direkt auf `main`.
 
 ---------------------------------------------------------------------
 
-## 10. Dokumentation ist ein Workflow, nicht nur eine Datei
+## 9. Dokumentation ist ein Workflow, nicht nur eine Datei
 
 Mit `/docs` könnt ihr beschreiben, was ihr braucht, zum Beispiel:
 
@@ -253,17 +223,17 @@ Dokumentations-Workflows sollen begrenzt, reproduzierbar und mit minimalen Recht
 
 ---------------------------------------------------------------------
 
-## 11. Heute starten und verantwortlich abschließen
+## 10. Heute starten und verantwortlich abschließen
 
 1. Doku-Repo und Quickstart öffnen.
 2. Aktivierungs-Issue erstellen.
 3. `/init` kommentieren und Setup-PR prüfen.
-4. Erstes kleines Arbeits-Issue formulieren.
+4. Ersten konkreten Arbeitsschritt planen.
 5. PR mit CI und Lisa-Review abschließen.
 
 Vor jedem Merge kurz prüfen:
 
-- Issue und PR beschreiben dasselbe Ziel.
+- Aufgabe und PR beschreiben dasselbe Ziel.
 - Build und Tests wurden wirklich ausgeführt.
 - Lisa-Feedback und Kevin-Änderungen wurden verstanden.
 - README oder Reflexionsbericht sind bei Bedarf aktualisiert.
@@ -284,7 +254,7 @@ https://github.com/ifi-softwareentwicklung-2026-projekte/Projekt-Agenten-Setup-D
 
 ---------------------------------------------------------------------
 
-## 12. Fragen, Probleme oder Feedback?
+## 11. Fragen, Probleme oder Feedback?
 
 Meldet euch sehr gerne bei mir, wenn ihr:
 
